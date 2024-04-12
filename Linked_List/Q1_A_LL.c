@@ -91,6 +91,51 @@ int main()
 int insertSortedLL(LinkedList *ll, int item)
 {
 	/* add your code here */
+	/**
+	 typedef struct _listnode{
+			int item;
+			struct _listnode *next;
+		} ListNode;			// You should not change the definition of ListNode
+
+		typedef struct _linkedlist{
+			int size;
+			ListNode *head;
+		} LinkedList;			// You should not change the definition of LinkedList
+	*/
+	/* add your code here */
+	ListNode *cur;
+	cur = ll->head;
+	// printf("%d" , ll->size);
+	// printf("%d",cur == NULL);
+	// printf("%d",item);
+	if (cur == NULL){
+		insertNode( ll, 0,item);
+	}
+	int cnt = 1;
+	while (cur != NULL )
+	{	
+		// printf("%d", cnt);
+		if(cur->item > item) {
+			insertNode( ll, cnt-1,item);
+			return cnt++;
+		}else if ( cur->item == item ){
+			return -1;
+		}else if ( cur->item < item && cur->next == NULL ){
+			// printf("cur->itrm : %d\n",cur->item);
+			// printf("item : %d\n",item);
+			insertNode( ll, cnt,item);
+			return cnt++;
+		}
+		
+		cur = cur->next;
+		
+		cnt ++;
+		// if ( cur == NULL ) break; 
+		/* code */
+
+	}
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -170,6 +215,8 @@ int insertNode(LinkedList *ll, int index, int value){
 
 	// Find the nodes before and at the target position
 	// Create a new node and reconnect the links
+	// printf("index : %d",index);
+	// printf("item : %d",findNode(ll, index - 1)->item);
 	if ((pre = findNode(ll, index - 1)) != NULL){
 		cur = pre->next;
 		pre->next = malloc(sizeof(ListNode));

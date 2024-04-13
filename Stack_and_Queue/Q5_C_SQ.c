@@ -109,7 +109,13 @@ int main()
 
 void recursiveReverse(Queue *q)
 {
-/* add your code here */
+	if(q->ll.head == NULL) return;
+
+	int temp = dequeue(q);
+
+	recursiveReverse(q);
+	enqueue(q,temp);
+	// 중국인의 팁을 봐버리고 말았다. 사실상 그냥 답지본듯
 }
 
 //////////////////////////////////////////////////////////////////

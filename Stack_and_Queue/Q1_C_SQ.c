@@ -136,7 +136,18 @@ void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	int count, i;
+	if (q == NULL)
+		return;
+	count = q->ll.size;
+
+	for (i = 0; i < count; i++){
+		int temp = dequeue(q);
+		printf("%d", temp % 2);
+		if( temp % 2 == 0){
+			enqueue(q,temp);
+		}
+	}	
 }
 
 //////////////////////////////////////////////////////////////////////////////////

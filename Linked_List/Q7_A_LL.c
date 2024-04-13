@@ -102,16 +102,13 @@ void RecursiveReverse(ListNode **ptrHead)
 	
     // 현재 노드의 다음 노드의 다음 노드를 현재 노드로 설정하여 역순으로 정렬
     current->next->next = current;
-    // 현재 노드의 다음 노드를 NULL로 설정하여 역순 정렬된 리스트의 끝으로 설정
     current->next = NULL;
+    // 현재 노드의 다음 노드를 NULL로 설정하여 역순 정렬된 리스트의 끝으로 설정
 
     // 역순으로 정렬된 리스트의 새로운 헤드를 업데이트
     *ptrHead = nextNode;
 
 	// 내가푼거아님 포인터 너무 어렵다 진짜
-	
-
-	
 
 }
 

@@ -113,12 +113,42 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+	if(ll->size == 0) 
+		return;
+
+	ListNode *cur = ll->head;
+	
+	push(s,cur->item);
+	while(cur->next != NULL){
+		cur = cur->next;
+		push(s,cur->item);
+	}
 }
 
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	if (s == NULL)
+		return;
+	int size = s->ll.size;
+	char *ssi = malloc(sizeof(char)*size); // 동적할당 최고야
+	for (int i = 0; i < size; i++)
+	{
+		int temp = pop(s);
+		// printf("%d %d\n", i, temp);
+		// printf("%d %d\n", i, temp%2);
+		if (temp%2 == 1){
+			ssi[i] = temp;
+		}
+	}
+	
+	for (int i = sizeof(ssi); i >= 0; i--)
+	{
+		if (ssi[i] != 0){
+			push(s,ssi[i]);
+		}
+	}
+	free(ssi);
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

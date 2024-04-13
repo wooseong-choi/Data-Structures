@@ -104,7 +104,62 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	Stack s;
+	s.ll.head = NULL;
+	s.ll.size = 0;
+
+	// '{' : 123	
+	// '[' : 91
+	// ']' : 93
+	// '(' : 40
+	// ')' : 41
+	// '}' : 125
+
+	if( sizeof(expression) % 2 != 0 ) return 1;
+
+	for (int i = 0; i < sizeof(expression)/2; i++)
+	{
+		push(&s, expression[i]);
+	}
+
+	// printf("%ld", sizeof(expression));
+
+	for (int i = sizeof(expression)/2; i < sizeof(expression); i++)
+	{
+		if(expression[i] == 123){
+			if( pop(&s) != 125 ){
+				return 1; 
+			}
+		}else
+		if(expression[i] == 91){
+			if( pop(&s) != 93 ){
+				return 1; 
+			}
+		}else
+		if(expression[i] == 40){
+			if( pop(&s) != 41 ){
+				return 1; 
+			}
+		} else
+
+		if(expression[i] == 125){
+			if( pop(&s) != 123 ){
+				return 1; 
+			}
+		}else
+		if(expression[i] == 93){
+			if( pop(&s) != 91 ){
+				return 1; 
+			}
+		}else
+		if(expression[i] == 41){
+			if( pop(&s) != 40 ){
+				return 1; 
+			}
+		} 
+	}
+
+	return 0;
 }
 
 ////////////////////////////////////////////////////////////

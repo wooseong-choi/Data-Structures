@@ -111,7 +111,27 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
-/* add your code here */
+	int size = s->ll.size;
+
+	char *temp = malloc(sizeof(char)*size);
+	printf("sizeof temp %ld",sizeof(temp));
+	for (int i = 0; i < size; i++)
+	{
+		int getStack = pop(s);
+
+		temp[i] = getStack;
+		if(getStack == value) break;
+	}
+
+	removeAllItemsFromStack(s);
+
+	for (int i = 0; i < sizeof(temp); i++)
+	{	
+		if(temp[i] != 0)
+			push(s,temp[i]);
+	}
+	free(temp);
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

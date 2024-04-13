@@ -112,7 +112,28 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	Stack s;
+	s.ll.head =NULL;
+	s.ll.size =0;
+	s.ll.tail=NULL;
+
+	int qCount = q->ll.size;
+
+	/* add your code here */
+	for (int i = 0; i < qCount; i++)
+	{
+		int getQueue = dequeue(q);
+		// printf("getQueue %d", getQueue);
+		push(&s, getQueue);
+	}
+
+	int sCount = s.ll.size;
+	for (int i = 0; i < sCount; i++)
+	{
+		int getStack = pop(&s);
+		enqueue(q, getStack);
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

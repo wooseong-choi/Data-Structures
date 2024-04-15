@@ -102,7 +102,42 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+	if(node == NULL) return 0;
+    // 두번씩 출력되는 문제가 있는 코드
+    // if(node->left == NULL && node->right == NULL) return 0;
+    // if(node->left != NULL){
+    //     if(node->left->left == NULL && node->left->right == NULL)
+    //         return 0;
+    //     else 
+    //         printf("%d ",node->item);
+    //         hasGreatGrandchild(node->left);
+    // }
+    // if(node->right != NULL){
+    //     if(node->right->left == NULL && node->right->right == NULL ) 
+    //         return 0;
+    //     else 
+    //         printf("%d ",node->item);
+    //         hasGreatGrandchild(node->right);
+    // }
+    
+    int isGreatGrandFatherCntL = 0;
+    int isGreatGrandFatherCntR = 0;
+    
+    if(node->left != NULL){
+        isGreatGrandFatherCntL++;
+        isGreatGrandFatherCntL += hasGreatGrandchild(node->left);
+    }
+    if(node->right != NULL){
+        isGreatGrandFatherCntR++;
+        isGreatGrandFatherCntR += hasGreatGrandchild(node->right);
+    }
+
+    // printf("%d %d", isGreatGrandFatherCntL, isGreatGrandFatherCntR);
+
+    if (isGreatGrandFatherCntL > 2 || isGreatGrandFatherCntR > 2) 
+        printf("%d \n", node->item);
+    
+    return isGreatGrandFatherCntL>isGreatGrandFatherCntR?isGreatGrandFatherCntL:isGreatGrandFatherCntR;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

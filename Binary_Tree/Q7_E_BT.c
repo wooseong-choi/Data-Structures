@@ -101,8 +101,30 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int smallestValue(BTNode *node)
-{
-	/* add your code here */
+{   
+    if(node == NULL) return 0;
+    int smallest = node->item;
+
+    int l_smallest = 2147483647; // max value of integer
+    int r_smallest = 2147483647;
+
+    if(node->left != NULL){
+        l_smallest = smallestValue(node->left);
+    }
+    if(node->right != NULL){
+        r_smallest = smallestValue(node->right);
+    }
+
+    smallest = l_smallest < r_smallest?l_smallest<smallest?l_smallest:smallest:r_smallest<smallest?r_smallest:smallest;
+    // 삼항연산자 풀어쓰기
+    // if l_smallest < r_smallest
+    //     if l_smallest < smallest
+    //         smallest = l_smallest
+    // else
+    //     if r_smallest < smallest
+    //         smallest = r_smallest 
+
+    return smallest;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

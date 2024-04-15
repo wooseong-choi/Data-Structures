@@ -92,9 +92,38 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 void levelOrderTraversal(BSTNode* root)
-{
+{	
+	if (root == NULL) return;
+	Queue *que;
+	que->head = NULL;
+	que->tail = NULL;
 
-    /* add your code here */
+	enqueue(&(que->head),&(que->tail),root);
+	// printf("isEmpty(que->head) %d ",isEmpty(que->head));
+	// printf("data = %d \n", que->head->data->item);
+
+	// BSTNode* temp; // 왜 tempNode를 생성하면 제대로 작동하지 않는지 모르겠다.
+	// temp->item = 0;
+	// temp->left = NULL;
+	// temp->right = NULL;
+	while( !isEmpty(que->head) ){
+		root = dequeue(&(que->head),&(que->tail));
+		// printf("temp->item %d ",root->item);
+		if(root != NULL){
+			printf("\n%d",root->item);
+		}
+		// printf("temp check");	
+		if (root->left != NULL)
+		{
+			enqueue(&(que->head),&(que->tail),root->left);
+		}
+		// printf("temp left check");	
+		if (root->right != NULL)
+		{
+			enqueue(&(que->head),&(que->tail),root->right);
+		}
+		// printf("temp right check");	
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -164,7 +193,7 @@ BSTNode* dequeue(QueueNode **headPtr, QueueNode **tailPtr)
 	}
 
 	free(tempPtr);
-
+	// printf("node.item %d", node->item);
 	return node;
 }
 

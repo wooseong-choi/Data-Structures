@@ -90,7 +90,30 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
-	 /* add your code here */
+	if (root == NULL) return;
+
+	// 스택 초기화
+	Stack stk;
+	stk.top = NULL;
+	// 너무 어려워서 답보고 품
+	while (1){
+
+		while ( root != NULL )
+		{
+			push(&stk, root);
+			root = root->left;
+		}
+
+		if ( !isEmpty( &stk ) )
+		{
+			root = pop(&stk);
+			printf("%d \n", root->item);
+			// if (root->right != NULL)
+			// 	push(&stk, root->right);	
+			root = root->right;
+		}else 
+			break;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

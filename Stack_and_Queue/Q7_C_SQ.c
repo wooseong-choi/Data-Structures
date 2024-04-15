@@ -114,17 +114,27 @@ int balanced(char *expression)
 	// '(' : 40
 	// ')' : 41
 	// '}' : 125
-
 	if( sizeof(expression) % 2 != 0 ) return 1;
+	int expressionSize = 0;
+	
+	while(1){
+		if (expression[expressionSize] == 123 || expression[expressionSize] == 91
+		|| expression[expressionSize] == 93 || expression[expressionSize] == 40
+		|| expression[expressionSize] == 41 || expression[expressionSize] == 125){
+			expressionSize++;
+		}else{ break; }
+		
+		// if (i == 257) break;
+	}
 
-	for (int i = 0; i < sizeof(expression)/2; i++)
+	for (int i = 0; i < expressionSize/2; i++)
 	{
 		push(&s, expression[i]);
 	}
 
-	// printf("%ld", sizeof(expression));
 
-	for (int i = sizeof(expression)/2; i < sizeof(expression); i++)
+
+	for (int i = expressionSize/2; i < expressionSize; i++)
 	{
 		if(expression[i] == 123){
 			if( pop(&s) != 125 ){
@@ -156,7 +166,7 @@ int balanced(char *expression)
 			if( pop(&s) != 40 ){
 				return 1; 
 			}
-		} 
+		}
 	}
 
 	return 0;

@@ -121,6 +121,34 @@ int balanced(char *expression)
 			push(&s,expression[i]);
 			// printf("%d\n", expression[i]);
 			// expression[i] = 0;
+		}else if(  expression[i] == 125 || expression[i] == 93 || expression[i] == 41  ){
+			int temp = pop(&s);
+			if(temp == 91){
+				if(93 == expression[i]){
+					// temp = pop(&s);
+					// printf("%d \n" , temp);
+				}else{
+					return 1;
+				}
+			}else 
+			if(temp == 123){
+				if(125 == expression[i]){
+					// temp = pop(&s);
+					// printf("%d \n" , temp);
+				}else{
+					return 1;
+				}
+			}else
+			if(temp == 40){
+				if(41 == expression[i]){
+					// temp = pop(&s);
+					// printf("%d \n" , temp);
+				}else{
+					return 1;
+				}		
+			} 
+
+
 		}
 		if (expression[i] == '\0'){
 			break;
@@ -130,48 +158,8 @@ int balanced(char *expression)
 		
 	}
 	
-	// printf("i is ^_^ %d", i);
-	int j = 0;
-	while (!isEmptyStack(&s))
-	{
-		if( j == 0 ) { j = pop(&s); }
-		// printf("j is %d i is %d = %d\n ", j,i, expression[i]);
-		if(expression[i] == 93 || expression[i] == 125 || expression[i] == 41){
-			if(j == 91){
-				if(93 == expression[i]){
-					j = pop(&s);
-					// printf("%d \n" , j);
-				}else{
-					return 1;
-				}
-			}else 
-			if(j == 123){
-				if(125 == expression[i]){
-					j = pop(&s);
-					// printf("%d \n" , j);
-				}else{
-					return 1;
-				}
-			}else
-			if(j == 40){
-				if(41 == expression[i]){
-					j = pop(&s);
-					// printf("%d \n" , j);
-				}else{
-					return 1;
-				}		
-			} 
-		}
-		if(i == 0){
-			break;
-		}
-		i--;
-		
-	}
-
 	return 0;
 
-	
 }
 int balanced_symmetry(char *expression)
 {

@@ -108,6 +108,77 @@ int balanced(char *expression)
 	s.ll.head = NULL;
 	s.ll.size = 0;
 
+	int i = 0;
+	while (1)
+	{	
+		// '{' : 123	
+		// '[' : 91
+		// ']' : 93
+		// '(' : 40
+		// ')' : 41
+		// '}' : 125
+		if( expression[i] == 123 || expression[i] == 91 || expression[i] == 40 ){
+			push(&s,expression[i]);
+			// printf("%d\n", expression[i]);
+			// expression[i] = 0;
+		}
+		if (expression[i] == '\0'){
+			break;
+		}
+
+		i++;
+		
+	}
+	
+	// printf("i is ^_^ %d", i);
+	int j = 0;
+	while (!isEmptyStack(&s))
+	{
+		if( j == 0 ) { j = pop(&s); }
+		// printf("j is %d i is %d = %d\n ", j,i, expression[i]);
+		if(expression[i] == 93 || expression[i] == 125 || expression[i] == 41){
+			if(j == 91){
+				if(93 == expression[i]){
+					j = pop(&s);
+					// printf("%d \n" , j);
+				}else{
+					return 1;
+				}
+			}else 
+			if(j == 123){
+				if(125 == expression[i]){
+					j = pop(&s);
+					// printf("%d \n" , j);
+				}else{
+					return 1;
+				}
+			}else
+			if(j == 40){
+				if(41 == expression[i]){
+					j = pop(&s);
+					// printf("%d \n" , j);
+				}else{
+					return 1;
+				}		
+			} 
+		}
+		if(i == 0){
+			break;
+		}
+		i--;
+		
+	}
+
+	return 0;
+
+	
+}
+int balanced_symmetry(char *expression)
+{
+	Stack s;
+	s.ll.head = NULL;
+	s.ll.size = 0;
+
 	// '{' : 123	
 	// '[' : 91
 	// ']' : 93

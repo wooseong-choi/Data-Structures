@@ -118,8 +118,6 @@ void preOrderIterative(BSTNode *root)
 		if(root->left != NULL)
 			push(&stk, root->left);
 	}
-
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

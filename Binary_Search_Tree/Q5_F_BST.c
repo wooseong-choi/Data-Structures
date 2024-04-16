@@ -54,6 +54,7 @@ int main()
 
 	printf("1: Insert an integer into the binary search tree;\n");
 	printf("2: Print the post-order traversal of the binary search tree;\n");
+	printf("3: remove haha;\n");
 	printf("0: Quit;\n");
 
 
@@ -74,6 +75,12 @@ int main()
 			postOrderIterativeS2(root); // You need to code this function
 			printf("\n");
 			break;
+		case 3:
+			printf("remove haha: ");
+			scanf("%d", &i);
+			removeNodeFromTree(root, i);
+			
+			break;
 		case 0:
 			removeAll(&root);
 			break;
@@ -91,14 +98,66 @@ int main()
 
 void postOrderIterativeS2(BSTNode *root)
 {
-	 /* add your code here */
+	Stack stk;
+	stk.top = NULL;
+	Stack outputStk;
+	outputStk.top = NULL;
+
+	push(&stk, root);
+
+	while(! isEmpty(&stk)){
+		root = pop(&stk);
+		push(&outputStk, root);
+		if(root->left != NULL)
+			push(&stk, root->left);
+		if (root->right != NULL)
+			push(&stk, root->right);
+	}
+	while (!isEmpty(&outputStk))
+	{
+		root = pop(&outputStk);
+		printf("%d\n", root->item);
+	}
+	
 }
 
 /* Given a binary search tree and a key, this function
    deletes the key and returns the new root. Make recursive function. */
 BSTNode* removeNodeFromTree(BSTNode *root, int value)
-{
-	/* add your code here */
+{	
+	// 안해!
+	if(root->item == value){
+		if(root->left == NULL && root->right == NULL){
+		// 경우 1 : 자식이 없는 노드 삭제의 경우
+			root = NULL;
+		}else if (root->left != NULL && root->right != NULL){
+		// 경우 2 : 자식 부자인 노드 삭제의 경우
+			BSTNode *temp;
+			temp = NULL;
+
+			temp = root->right;
+			while (temp->left != NULL)
+			{
+				temp = temp->left;
+			}			
+			root = temp;
+			removeNodeFromTree(root->right, root->item);
+		}else{
+		// 경우 3 : 자식 하나인 노드 삭제의 경우
+			if(root->left != NULL){
+				root = root->left;
+			}
+			if(root->right != NULL){
+				root = root->right;
+			}
+		}
+	}else{
+		removeNodeFromTree(root->left, value);
+		removeNodeFromTree(root->right, value);
+	}
+		printf("트리 구조 확인 %d\n", root->item);
+
+
 }
 ///////////////////////////////////////////////////////////////////////////////
 

@@ -40,7 +40,7 @@ BSTNode *peek(Stack *s);
 int isEmpty(Stack *s);
 void removeAll(BSTNode **node);
 BSTNode* removeNodeFromTree(BSTNode *root, int value);
-
+void printTree(BSTNode *node);
 ///////////////////////////// main() /////////////////////////////////////////////
 
 int main()
@@ -60,7 +60,7 @@ int main()
 
 	while (c != 0)
 	{
-		printf("Please input your choice(1/2/0): ");
+		printf("Please input your choice(1/2/3/0): ");
 		scanf("%d", &c);
 
 		switch (c)
@@ -79,7 +79,7 @@ int main()
 			printf("remove haha: ");
 			scanf("%d", &i);
 			removeNodeFromTree(root, i);
-			
+			printTree(root);
 			break;
 		case 0:
 			removeAll(&root);
@@ -125,40 +125,86 @@ void postOrderIterativeS2(BSTNode *root)
    deletes the key and returns the new root. Make recursive function. */
 BSTNode* removeNodeFromTree(BSTNode *root, int value)
 {	
+	if(root == NULL){
+		printf("root is null");
+		return root;
+	}
+	// BSTNode *temp;
 	// 안해!
 	if(root->item == value){
+		// printf("%s","뀨");
 		if(root->left == NULL && root->right == NULL){
 		// 경우 1 : 자식이 없는 노드 삭제의 경우
-			root = NULL;
-		}else if (root->left != NULL && root->right != NULL){
+			free(root);
+			return NULL;
+		}
+		else if (root->left != NULL && root->right != NULL){
 		// 경우 2 : 자식 부자인 노드 삭제의 경우
-			BSTNode *temp;
-			temp = NULL;
+			BSTNode *tempTwoC;
+			tempTwoC = NULL;
 
-			temp = root->right;
-			while (temp->left != NULL)
+			tempTwoC = root->right;
+			
+			while (tempTwoC->left != NULL)
 			{
-				temp = temp->left;
-			}			
-			root = temp;
-			removeNodeFromTree(root->right, root->item);
-		}else{
-		// 경우 3 : 자식 하나인 노드 삭제의 경우
-			if(root->left != NULL){
-				root = root->left;
+				tempTwoC = tempTwoC->left;
 			}
-			if(root->right != NULL){
-				root = root->right;
+			tempTwoC->left = root->left;	
+			free(root);	// 동적할당 해제	
+			root = tempTwoC;
+			return root;
+		}
+		else{
+		// 경우 3 : 자식 하나인 노드 삭제의 경우
+			BSTNode *tempOneC = root;
+			if(tempOneC->left != NULL){
+				tempOneC = tempOneC->left;
+				while(1){
+					if( tempOneC->right != NULL){
+						tempOneC = tempOneC->right;
+					}else{
+						free(root);
+						root = tempOneC;
+						break;
+					}
+				}
+			}
+			if(tempOneC->right != NULL){
+				tempOneC = tempOneC->right;
+				while(1){
+					if( tempOneC->left != NULL){
+						tempOneC = tempOneC->left;
+					}else{
+						free(root);
+						root = tempOneC;
+						break;
+					}
+				}
 			}
 		}
 	}else{
-		removeNodeFromTree(root->left, value);
-		removeNodeFromTree(root->right, value);
-	}
 		printf("트리 구조 확인 %d\n", root->item);
+		if(root->item > value){
+			root->left = removeNodeFromTree(root->left, value);
+		}else{
+			root->right = removeNodeFromTree(root->right, value);
+		}
+	}
 
+	return root;
 
 }
+
+void printTree(BSTNode *node)
+{
+    if(node == NULL) return;
+
+    printTree(node->left);
+    printf("%d ",node->item);
+    printTree(node->right);
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 void insertBSTNode(BSTNode **node, int value){

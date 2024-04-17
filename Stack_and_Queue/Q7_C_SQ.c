@@ -113,10 +113,10 @@ int balanced(char *expression)
 	{	
 		// '{' : 123	
 		// '[' : 91
-		// ']' : 93
 		// '(' : 40
-		// ')' : 41
 		// '}' : 125
+		// ']' : 93
+		// ')' : 41
 		if( expression[i] == 123 || expression[i] == 91 || expression[i] == 40 ){
 			push(&s,expression[i]);
 			// printf("%d\n", expression[i]);
